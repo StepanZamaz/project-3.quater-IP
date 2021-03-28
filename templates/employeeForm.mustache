@@ -1,0 +1,56 @@
+{{#create}}<h1>Nový zaměstnanec</h1>{{/create}}
+{{#update}}<h1>Upravit zaměstnance</h1>{{/update}}
+
+<form method="post">
+    <div class="mb-3">
+        <label for="name">Jméno</label>
+        <input type="text" name="name" id="name" value="{{employee.name}}" required class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="surname">Příjmení</label>
+        <input type="text" name="surname" id="surname" value="{{employee.surname}}" required class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="job">Pozice</label>
+        <input type="text" name="job" id="job" value="{{employee.job}}" required class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="wage">Plat</label>
+        <input type="text" name="wage" id="wage" value="{{employee.wage}}" required class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="password">Heslo</label>
+        <input type="text" name="password" id="password" value="" required class="form-control">
+    </div>
+    <div>
+        <label for="admin">Admin</label>
+        <input type="checkbox" id="admin" name="admin" {{#employee.admin}}checked{{/employee.admin}}>
+    </div>
+
+    <div class="mb-3">
+        <label for="rooms">Místnost</label>
+        <select name="rooms" id="rooms">
+            {{#rooms}}
+                <option value="{{room_id}}">{{name}}</option>
+            {{/rooms}}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Klíče</label><br>
+        {{#rooms}}
+            <label for="keys[]">{{ name }}</label>
+            <input {{#key}}checked{{/key}} type="checkbox" name="keys[]" id="keys[]" value="{{ room_id }}"><br>
+        {{/rooms}}
+    </div>
+    <div class="mb-3">
+        {{#create}}
+            <input type="hidden" name="action" value="create">
+            <input type="submit" value="Vytvořit" class="btn btn-primary">
+        {{/create}}
+        {{#update}}
+            <input type="hidden" name="action" value="update">
+            <input type="hidden" name="employee_id" value="{{employee.getPrimaryKey}}">
+            <input type="submit" value="Upravit" class="btn btn-primary">
+        {{/update}}
+    </div>
+</form>

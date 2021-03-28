@@ -1,0 +1,43 @@
+<h1>Seznam místností</h1>
+{{#admin}}
+    <a href="create.php" class="btn btn-primary mt-3">Nová místnost</a>
+{{/admin}}
+<form action="roomList.php" method="post" class="form-inline" onsubmit="return confirm('Skutečně se chcete odhlásit?')">
+    <input type="hidden" name="logout" value="logout" class="btn btn-danger">
+    <input type="submit" value="Odhlásit" class="btn btn-danger">
+</form>
+<table class="table table-striped roomList">
+    <thead>
+    <tr>
+        <th>Název</th>
+        <th>Číslo</th>
+        <th>Telefon</th>
+    {{#admin}}
+        <th>Akce</th>
+    {{/admin}}
+    </tr>
+    </thead>
+    <tbody>
+    {{#rooms }}
+    <tr>
+        <td><a href="{{roomDetail}}?roomId={{room_id}}">{{ name }}</a></td>
+        <td>{{no}}</td>
+        <td>{{phone}}</td>
+        {{#admin}}
+        <td>
+            <a href="update.php?room_id={{room_id}}" class="btn btn-primary">Změnit</a>
+            <form action="delete.php" method="post" class="form-inline" onsubmit="return confirm('Skutečně smazat? \n Akci nelze vrátit')">
+                <input type="hidden" name="room_id" value="{{room_id}}">
+                <input type="submit" value="Smazat" class="btn btn-danger">
+            </form>
+        </td>
+        {{/admin}}
+    </tr>
+    {{/rooms}}
+    </tbody>
+</table>
+<a href='../index.php'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5zM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5z"/>
+    </svg>
+    Zpět na rozcestník</a>
